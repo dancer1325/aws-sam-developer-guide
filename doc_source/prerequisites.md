@@ -1,10 +1,7 @@
 # AWS SAM prerequisites<a name="prerequisites"></a>
 
-Complete the following prerequisites before installing and using the AWS Serverless Application Model Command Line Interface \(AWS SAM CLI\)\.
-
-To use the AWS SAM CLI, you need the following:
 + An AWS account, AWS Identity and Access Management \(IAM\) credentials, and an IAM access key pair\.
-+ The AWS Command Line Interface \(AWS CLI\) to configure AWS credentials\.
++ AWS CLI -- to configure -- AWS credentials
 
 **Topics**
 + [Step 1: Sign up for an AWS account](#prerequisites-sign-up)
