@@ -1,16 +1,6 @@
 # Installing the AWS SAM CLI<a name="install-sam-cli"></a>
 
-Install the latest release of the AWS Serverless Application Model Command Line Interface \(AWS SAM CLI\) on supported operating systems\.
-
-To learn how to manage a currently installed version of the AWS SAM CLI, including how to upgrade, uninstall, or manage nightly builds, see [Managing AWS SAM CLI versions](manage-sam-cli-versions.md)\.
-
-**Is this your first time installing the AWS SAM CLI?**  
-Complete all [prerequisites](prerequisites.md) in the previous section before moving forward\. This includes:  
-Signing up for an AWS account\.
-Creating an administrative IAM user\.
-Creating an access key ID and secret access key\.
-Installing the AWS CLI\.
-Configuring AWS credentials\.
+* see [Managing AWS SAM CLI versions](manage-sam-cli-versions.md)\.
 
 **Topics**
 + [Installing the AWS SAM CLI](#install-sam-cli-instructions)
@@ -19,11 +9,8 @@ Configuring AWS credentials\.
 
 ## Installing the AWS SAM CLI<a name="install-sam-cli-instructions"></a>
 
- To install the AWS SAM CLI, follow the instructions for your operating system\. 
-
 ### Linux<a name="install-sam-cli-instructions-linux"></a>
 
-------
 #### [ x86\_64 \- command line installer ]
 
 1. Download the [AWS SAM CLI \.zip file](https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip) to a directory of your choice\.
@@ -127,25 +114,17 @@ SAM CLI, version 1.58.0
 
 ### macOS<a name="install-sam-cli-instructions-macos"></a>
 
-Install the AWS SAM CLI using its package installer or through Homebrew\. We recommend using the package installer\.
+#### package installer<a name="install-sam-cli-instructions-macos-package"></a>
 
-#### Using the package installer<a name="install-sam-cli-instructions-macos-package"></a>
-
-The package installer has two installation methods that you can choose from:
-
-1. GUI
-
-1. Command line
-
-You can install for all users or just your current user\. To install for all users, superuser authorization is required\.
-
-#### Installation steps<a name="install-sam-cli-instructions-macos-steps"></a>
-
- Install the AWS SAM CLI using any of the following options\. 
-
-------
-#### [ GUI \- All users ]
-
+* 👀recommended one 👀
+* options
+  * GUI
+  * CL
+* audience | install it
+  * ALL users
+  * current user
+##### GUI
+###### [ GUI \- All users ]
 **To download the package installer**
 **Note**  
  If you previously installed the AWS SAM CLI through Homebrew or pip, you need to uninstall it first\. For instructions, see [Uninstalling the AWS SAM CLI](manage-sam-cli-versions.md#manage-sam-cli-versions-uninstall)\. 
@@ -179,7 +158,7 @@ You can install for all users or just your current user\. To install for all use
   ```
 
 ------
-#### [ GUI \- Current user ]
+###### [ GUI \- Current user ]
 
 **To download the package installer**
 **Note**  
@@ -228,7 +207,8 @@ You can install for all users or just your current user\. To install for all use
   ```
 
 ------
-#### [ Command line \- All users ]
+##### CL
+###### [ Command line \- All users ]
 
 **To download the package installer**
 **Note**  
@@ -263,7 +243,7 @@ You can install for all users or just your current user\. To install for all use
   ```
 
 ------
-#### [ Command line \- Current user ]
+###### [ Command line \- Current user ]
 
 **To download the package installer**
 **Note**  
@@ -344,29 +324,9 @@ You can install for all users or just your current user\. To install for all use
 
 ------
 #### [ Homebrew ]
-
-**Important**  
-You must have Homebrew installed on your machine\. For install instructions, see [Installing Homebrew to use with the AWS SAM CLI](install-homebrew.md)\.
-
-Follow these steps to install the AWS SAM CLI using Homebrew:
-
-```
-$ brew install aws/tap/aws-sam-cli
-```
-
-Verify the installation:
-
-```
-$ sam --version
-```
-
-After successful installation of the AWS SAM CLI, you should see output like the following:
-
-```
-SAM CLI, version 1.58.0
-```
-
-------
+* `brew install aws/tap/aws-sam-cli`
+* `sam --version`
+  * verify the installation
 
 ### Windows<a name="install-sam-cli-instructions-windows"></a>
 
@@ -406,11 +366,10 @@ The [AWS SAM CLI app templates repository](https://github.com/aws/aws-sam-cli-ap
 
 ## Troubleshooting<a name="install-sam-cli-troubleshooting"></a>
 
-If you come across issues while installing the AWS SAM CLI, see [Installation errors](sam-cli-troubleshooting.md#sam-cli-troubleshoot-install)\.
+* see [Installation errors](sam-cli-troubleshooting.md#sam-cli-troubleshoot-install)\.
 
 ## Next steps<a name="install-sam-cli-next-steps"></a>
 
-To learn more about the AWS SAM CLI and to begin building your own serverless applications, see the following:
-+ [Tutorial: Deploying a Hello World application](serverless-getting-started-hello-world.md) – Step\-by\-step instructions to download, build, and deploy a basic serverless application\.
-+ [The Complete AWS SAM Workshop](https://catalog.workshops.aws/complete-aws-sam/en-US) – A workshop designed to teach you many of the major features that AWS SAM provides\.
-+ [AWS SAM example applications and patterns](https://serverlessland.com/patterns?framework=SAM) – Sample applications and patterns from community authors that you can further experiment with\.
++ [Tutorial: Deploying a Hello World application](serverless-getting-started-hello-world.md) 
++ [The Complete AWS SAM Workshop](https://catalog.workshops.aws/complete-aws-sam/en-US) 
++ [AWS SAM example applications and patterns](https://serverlessland.com/patterns?framework=SAM) 
