@@ -119,282 +119,97 @@
 
 ## Step 2: Build your application<a name="serverless-getting-started-hello-world-build"></a>
 
-* TODO:
-In this step, you use the AWS SAM CLI to build your application and prepare for deployment\. When you build, the AWS SAM CLI creates a `.aws-sam` directory and organizes your function dependencies, project code, and project files there\.
+* goal
+  * build your application
+    * AWS SAM CLI 
+      * creates a `.aws-sam/`
+      * organizes your
+        * function dependencies,
+        * project code,
+        * project files
+  * prepare for deployment
 
-**To build your application**
-+ In your command line, from the `sam-app` project directory, run the following:
-
+*
   ```
-  $ sam build
-  ```
-**Note**  
- If you don't have Python on your local machine, use the sam build \-\-use\-container  command instead\. The AWS SAM CLI will create a Docker container that includes your function's runtime and dependencies\. This command requires Docker on your local machine\. To install Docker, see [Installing Docker](install-docker.md)\.
-
-  The following is an example of the AWS SAM CLI output:
-
-  ```
-  $ sam build
-  Starting Build use cache
-  Manifest file is changed (new hash: 3298f1304...d4d421) or dependency folder (.aws-sam/deps/4d3dfad6-a267-47a6-a6cd-e07d6fae318c) is missing for (HelloWorldFunction), downloading dependencies and copying/building source
-  Building codeuri: /Users/.../Demo/sam-tutorial1/sam-app/hello_world runtime: python3.9 metadata: {} architecture: x86_64 functions: HelloWorldFunction
-  Running PythonPipBuilder:CleanUp
-  Running PythonPipBuilder:ResolveDependencies
-  Running PythonPipBuilder:CopySource
-  Running PythonPipBuilder:CopySource
-  
-  Build Succeeded
-  
-  Built Artifacts  : .aws-sam/build
-  Built Template   : .aws-sam/build/template.yaml
-  
-  Commands you can use next
-  =========================
-  [*] Validate SAM template: sam validate
-  [*] Invoke Function: sam local invoke
-  [*] Test Function in the Cloud: sam sync --stack-name {{stack-name}} --watch
-  [*] Deploy: sam deploy --guided
+  sam-app$ sam build
   ```
 
-  The following is a shortened example of the `.aws-sam` directory created by the AWS SAM CLI:
+  * if you do NOT have Python | your local machine -> use `sam build -use-container`
+    * create a Docker container / includes your function's
+      * runtime
+      * dependencies
+    * requirements
+      * Docker | your local machine
+  * example of the AWS SAM CLI output
 
-  ```
-  .aws-sam
-  ├── build
-  │   ├── HelloWorldFunction
-  │   │   ├── __init__.py
-  │   │   ├── app.py
-  │   │   └── requirements.txt
-  │   └── template.yaml
-  └── build.toml
-  ```
+      ```
+        $ sam build
+        Starting Build use cache
+        Manifest file is changed (new hash: 3298f1304...d4d421) or dependency folder (.aws-sam/deps/4d3dfad6-a267-47a6-a6cd-e07d6fae318c) is missing for (HelloWorldFunction), downloading dependencies and copying/building source
+        Building codeuri: /Users/.../Demo/sam-tutorial1/sam-app/hello_world runtime: python3.9 metadata: {} architecture: x86_64 functions: HelloWorldFunction
+        Running PythonPipBuilder:CleanUp
+        Running PythonPipBuilder:ResolveDependencies
+        Running PythonPipBuilder:CopySource
+        Running PythonPipBuilder:CopySource
+        
+        Build Succeeded
+        
+        Built Artifacts  : .aws-sam/build
+        Built Template   : .aws-sam/build/template.yaml
+        
+        Commands you can use next
+        =========================
+        [*] Validate SAM template: sam validate
+        [*] Invoke Function: sam local invoke
+        [*] Test Function in the Cloud: sam sync --stack-name {{stack-name}} --watch
+        [*] Deploy: sam deploy --guided
+        ```
 
-Some important files to highlight:
-+ `build/HelloWorldFunction` – Contains your Lambda function code and dependencies\. The AWS SAM CLI creates a directory for each function in your application\.
-+ `build/template.yaml` – Contains a copy of your AWS SAM template that is referenced by AWS CloudFormation at deployment\.
-+ `build.toml` – Configuration file that stores default parameter values referenced by the AWS SAM CLI when building and deploying your application\.
+  * shortened example of `.aws-sam/`
 
-You are now ready to deploy your application to the AWS Cloud\.
+    ```
+      .aws-sam
+      ├── build
+      │   ├── HelloWorldFunction
+      │   │   ├── __init__.py
+      │   │   ├── app.py
+      │   │   └── requirements.txt
+      │   └── template.yaml
+      └── build.toml
+      ```
+
+    + `build/HelloWorldFunction`
+      + your Lambda function code & dependencies
+        + specific directory / EACH function in your application\.
+    + `build/template.yaml`
+      + copy of your AWS SAM template / -- is referenced by -- AWS CloudFormation | deployment\.
+    + `build.toml`
+      + stores default parameter values / -- referenced by the -- AWS SAM CLI |
+        + building your application
+        + deploying your application\.
 
 ## Step 3: Deploy your application to the AWS Cloud<a name="serverless-getting-started-hello-world-deploy"></a>
 
-**Note**  
-This step requires AWS credentials configuration\. For more information, see [Step 5: Use the AWS CLI to configure AWS credentials](prerequisites.md#prerequisites-configure-credentials) in [AWS SAM prerequisites](prerequisites.md)\.
+* goal
+  * deploy -- via AWS SAM CLI -- your application | AWS Cloud
+    * steps
+      * Guide you -- through -- configuring your application settings for deployment\.
+      + Upload your application files | Amazon S3
+      + AWS SAM template -- is transformed into an -- AWS CloudFormation template
+      + uploads your template | AWS CloudFormation service -- to provision -- your AWS resources\.
 
-In this step, you use the AWS SAM CLI to deploy your application to the AWS Cloud\. The AWS SAM CLI will do the following:
-+ Guide you through configuring your application settings for deployment\.
-+ Upload your application files to Amazon Simple Storage Service \(Amazon S3\)\.
-+ Transform your AWS SAM template into an AWS CloudFormation template\. It then uploads your template to the AWS CloudFormation service to provision your AWS resources\.
-
-**To deploy your application**
-
-1. In your command line, from the `sam-app` project directory, run the following:
-
-   ```
-   $ sam deploy --guided
-   ```
-
-1. Follow the AWS SAM CLI interactive flow to configure your application settings\. Configure the following:
-
-   1. The **AWS CloudFormation stack name** – A stack is a collection of AWS resources that you can manage as a single unit\. To learn more, see [Working with stacks](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html) in the *AWS CloudFormation User Guide*\.
-
-   1. The **AWS Region** to deploy your AWS CloudFormation stack to\. For more information, see [AWS CloudFormation endpoints](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-endpoints.html) in the *AWS CloudFormation User Guide*\.
-
-   1. For this tutorial, opt out of **confirming changes before deploy**\.
-
-   1. Allow **IAM role creation** – This lets AWS SAM create the IAM role necessary for your API Gateway resource and Lambda function resource to interact\.
-
-   1. For this tutorial, opt out of **disabling rollback**\.
-
-   1. Allow **HelloWorldFunction without authorization defined** – This message displays because your API Gateway endpoint is configured to be publicly accessible, without authorization\. Since this is the intended configuration for your Hello World application, allow the AWS SAM CLI to continue\. For more information about configuring authorization, see [Controlling access to API Gateway APIs](serverless-controlling-access-to-apis.md)\.
-
-   1. **Save arguments to configuration file** – This will update your application’s `samconfig.toml` file with your deployment preferences\.
-
-   1. Select the default **configuration file name**\.
-
-   1. Select the default **configuration environment**\.
-
-   The following is an example output of the `sam deploy --guided` interactive flow:
-
-   ```
-   $ sam-app sam deploy --guided
-   
-   Configuring SAM deploy
-   ======================
-   
-       Looking for config file [samconfig.toml] :  Found
-       Reading default arguments  :  Success
-   
-       Setting default arguments for 'sam deploy'
-       =========================================
-       Stack Name [sam-app]:
-       AWS Region [us-west-2]:
-       #Shows you resources changes to be deployed and require a 'Y' to initiate deploy
-       Confirm changes before deploy [Y/n]: n
-       #SAM needs permission to be able to create roles to connect to the resources in your template
-       Allow SAM CLI IAM role creation [Y/n]: 
-       #Preserves the state of previously provisioned resources when an operation fails
-       Disable rollback [y/N]: 
-       HelloWorldFunction may not have authorization defined, Is this okay? [y/N]: y
-       Save arguments to configuration file [Y/n]: 
-       SAM configuration file [samconfig.toml]:
-       SAM configuration environment [default]:
-   ```
-
-1. The AWS SAM CLI deploys your application by doing the following:
-   + The AWS SAM CLI creates an Amazon S3 bucket and uploads your `.aws-sam` directory\.
-   + The AWS SAM CLI transforms your AWS SAM template into AWS CloudFormation and uploads it to the AWS CloudFormation service\.
-   + AWS CloudFormation provisions your resources\.
-
-   During deployment, the AWS SAM CLI displays your progress\. The following is an example output:
-
-   ```
-   Looking for resources needed for deployment:
-   
-       Managed S3 bucket: aws-sam-cli-managed-default-samclisourcebucket-1a4x26zbcdkqr
-       A different default S3 bucket can be set in samconfig.toml
-   
-       Parameter "stack_name=sam-app" in [default.deploy.parameters] is defined as a global parameter [default.global.parameters].
-       This parameter will be only saved under [default.global.parameters] in /Users/.../Demo/sam-tutorial1/sam-app/samconfig.toml.
-   
-       Saved arguments to config file
-       Running 'sam deploy' for future deployments will use the parameters saved above.
-       The above parameters can be changed by modifying samconfig.toml
-       Learn more about samconfig.toml syntax at
-       https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-config.html
-   
-   File with same data already exists at sam-app/da3c598813f1c2151579b73ad788cac8, skipping upload
-   
-       Deploying with following values
-       ===============================
-       Stack name                   : sam-app
-       Region                       : us-west-2
-       Confirm changeset            : False
-       Disable rollback             : False
-       Deployment s3 bucket         : aws-sam-cli-managed-default-samclisourcebucket-1a4x26zbcdkqr
-       Capabilities                 : ["CAPABILITY_IAM"]
-       Parameter overrides          : {}
-       Signing Profiles             : {}
-   
-   Initiating deployment
-   =====================
-   
-   File with same data already exists at sam-app/2bebf67c79f6a743cc5312f6dfc1efee.template, skipping upload
-   
-   
-   Waiting for changeset to be created..
-   
-   CloudFormation stack changeset
-   ---------------------------------------------------------------------------------------------------------------------------------------------
-   Operation                           LogicalResourceId                   ResourceType                        Replacement
-   ---------------------------------------------------------------------------------------------------------------------------------------------
-   * Modify                            HelloWorldFunction                  AWS::Lambda::Function               False
-   * Modify                            ServerlessRestApi                   AWS::ApiGateway::RestApi            False
-   - Delete                            AwsSamAutoDependencyLayerNestedSt   AWS::CloudFormation::Stack          N/A
-                                       ack
-   ---------------------------------------------------------------------------------------------------------------------------------------------
-   
-   
-   Changeset created successfully. arn:aws:cloudformation:us-west-2:513423067560:changeSet/samcli-deploy1678917603/22e05525-08f9-4c52-a2c4-f7f1fd055072
-   
-   
-   2023-03-15 12:00:16 - Waiting for stack create/update to complete
-   
-   CloudFormation events from stack operations (refresh every 0.5 seconds)
-   ---------------------------------------------------------------------------------------------------------------------------------------------
-   ResourceStatus                      ResourceType                        LogicalResourceId                   ResourceStatusReason
-   ---------------------------------------------------------------------------------------------------------------------------------------------
-   UPDATE_IN_PROGRESS                  AWS::Lambda::Function               HelloWorldFunction                  -
-   UPDATE_COMPLETE                     AWS::Lambda::Function               HelloWorldFunction                  -
-   UPDATE_COMPLETE_CLEANUP_IN_PROGRE   AWS::CloudFormation::Stack          sam-app                             -
-   SS
-   DELETE_IN_PROGRESS                  AWS::CloudFormation::Stack          AwsSamAutoDependencyLayerNestedSt   -
-                                                                           ack
-   DELETE_COMPLETE                     AWS::CloudFormation::Stack          AwsSamAutoDependencyLayerNestedSt   -
-                                                                           ack
-   UPDATE_COMPLETE                     AWS::CloudFormation::Stack          sam-app                             -
-   ---------------------------------------------------------------------------------------------------------------------------------------------
-   
-   CloudFormation outputs from deployed stack
-   ----------------------------------------------------------------------------------------------------------------------------------------------
-   Outputs
-   ----------------------------------------------------------------------------------------------------------------------------------------------
-   Key                 HelloWorldFunctionIamRole
-   Description         Implicit IAM Role created for Hello World function
-   Value               arn:aws:iam::513423067560:role/sam-app-HelloWorldFunctionRole-15GLOUR9LMT1W
-   
-   Key                 HelloWorldApi
-   Description         API Gateway endpoint URL for Prod stage for Hello World function
-   Value               https://<restapiid>.execute-api.us-west-2.amazonaws.com/Prod/hello/
-   
-   Key                 HelloWorldFunction
-   Description         Hello World Lambda Function ARN
-   Value               arn:aws:lambda:us-west-2:513423067560:function:sam-app-HelloWorldFunction-yQDNe17r9maD
-   ----------------------------------------------------------------------------------------------------------------------------------------------
-   
-   
-   Successfully created/updated stack - sam-app in us-west-2
-   ```
-
-Your application is now deployed and running in the AWS Cloud\!
+* see [sampleApp](../sam-app/README.md#deploy-the-sample-application)
 
 ## Step 4: Run your application<a name="serverless-getting-started-hello-world-run"></a>
 
-In this step, you will send a GET request to your API endpoint and see your Lambda function output\.
+* goal
+  * send a GET request -- to -- your API endpoint
 
-**To get your API endpoint value**
-
-1. From the information displayed by the AWS SAM CLI in the previous step, locate the `Outputs` section\. In this section, locate your `HelloWorldApi` resource to find your HTTP endpoint value\. The following is an example output:
-
-   ```
-   ----------------------------------------------------------------------------------------------------------------------------------------------
-   Outputs
-   ----------------------------------------------------------------------------------------------------------------------------------------------
-   ...
-   Key                 HelloWorldApi
-   Description         API Gateway endpoint URL for Prod stage for Hello World function
-   Value               https://ets1gv8lxi.execute-api.us-west-2.amazonaws.com/Prod/hello/
-   ...
-   ----------------------------------------------------------------------------------------------------------------------------------------------
-   ```
-
-1. Alternatively, you can use the sam list endpoints \-\-output json command to get this information\. The following is an example output:
-
-   ```
-   $ sam list endpoints --output json
-   2023-03-15 12:39:19 Loading policies from IAM...
-   2023-03-15 12:39:25 Finished loading policies from IAM.
-   [
-     {
-       "LogicalResourceId": "HelloWorldFunction",
-       "PhysicalResourceId": "sam-app-HelloWorldFunction-yQDNe17r9maD",
-       "CloudEndpoint": "-",
-       "Methods": "-"
-     },
-     {
-       "LogicalResourceId": "ServerlessRestApi",
-       "PhysicalResourceId": "ets1gv8lxi",
-       "CloudEndpoint": [
-         "https://ets1gv8lxi.execute-api.us-west-2.amazonaws.com/Prod",
-         "https://ets1gv8lxi.execute-api.us-west-2.amazonaws.com/Stage"
-       ],
-       "Methods": [
-         "/hello['get']"
-       ]
-     }
-   ]
-   ```
-
-**To invoke your function**
-+ Using your browser or the command line, send a GET request to your API endpoint\. The following is an example using the curl command:
-
-  ```
-  $ curl https://ets1gv8lxi.execute-api.us-west-2.amazonaws.com/Prod/hello/
-  {"message": "hello world"}
-  ```
+* see [sampleApp](../sam-app/README.md#run-your-application)
 
 ## Step 5: Modify and sync your application to the AWS Cloud<a name="serverless-getting-started-hello-world-sync"></a>
 
+* TODO:
 In this step, you use the AWS SAM CLI sam sync \-\-watch command to sync local changes to the AWS Cloud\.
 
 **To use sam sync**
@@ -531,79 +346,77 @@ Next, you will modify your Lambda function code\. The AWS SAM CLI will automatic
 
 ## Step 6: \(Optional\) Test your application locally<a name="serverless-getting-started-hello-world-test"></a>
 
-**Note**  
-This step is optional since it requires Docker on your local machine\.
+* requirements
+  * Docker | your local machine
+    * see [Installing Docker](install-docker.md)
+* `sam local`
+  * allows
+    * testing your application locally
+  * how does it work?
+    * 👀AWS SAM CLI -- creates, via Docker -- a local environment👀
+      * local environment == cloud-based execution environment -- of -- your Lambda function
+  * uses
+    * call that HTTP API endpoint locally -- to invoke -- your Lambda function
+  * `sam local invoke` | `sam-app` project directory
+    * example output
 
-**Important**  
-To use the AWS SAM CLI for local testing, you must have Docker installed and configured\. For more information, see [Installing Docker](install-docker.md)\.
+      ```
+        $ sam local invoke
+        Invoking app.lambda_handler (python3.9)
+        Local image was not found.
+        Removing rapid images for repo public.ecr.aws/sam/emulation-python3.9
+        Building image.....................
+        Using local image: public.ecr.aws/lambda/python:3.9-rapid-x86_64.
+        
+        Mounting /Users/.../Demo/sam-tutorial1/sam-app/.aws-sam/build/HelloWorldFunction as /var/task:ro,delegated inside runtime container
+        START RequestId: b046db01-2a00-415d-af97-35f3a02e9eb6 Version: $LATEST
+        END RequestId: b046db01-2a00-415d-af97-35f3a02e9eb6
+        REPORT RequestId: b046db01-2a00-415d-af97-35f3a02e9eb6    Init Duration: 1.01 ms    Duration: 633.45 ms    Billed Duration: 634 ms    Memory Size: 128 MB    Max Memory Used: 128 MB
+        {"statusCode": 200, "body": "{\"message\": \"hello world\"}"}
+        ```
+      
+    * Problems:
+      * Problem1: "Error: Running AWS SAM projects locally requires Docker. Have you got it installed and running?"
+        * Attempt1: Switch to "9p" volumes
+        * Attempt2: https://github.com/aws/aws-sam-cli/issues/3595#issuecomment-1575553210
+        * Solution: `export DOCKER_HOST="unix://$HOME/.rd/docker.sock"` 
+          * https://github.com/aws/aws-toolkit-vscode/issues/3413#issuecomment-1549117147
+  * `sam local start-api` | `sam-app` project directory
+    * 👀SAM CLI creates 👀
+      * local Docker container -- for -- your Lambda function
+      * local HTTP server / simulate your API endpoint
+    * Problems:
+      * Problem1: "Error: Running AWS SAM projects locally requires Docker. Have you got it installed and running?"
+        * Attempt1: Switch to "9p" volumes
+        * Attempt2: https://github.com/aws/aws-sam-cli/issues/3595#issuecomment-1575553210
+        * Solution: `export DOCKER_HOST="unix://$HOME/.rd/docker.sock"`
+          * https://github.com/aws/aws-toolkit-vscode/issues/3413#issuecomment-1549117147
+      * example output
 
-In this step, you use the AWS SAM CLI sam local command to test your application locally\. To accomplish this, the AWS SAM CLI creates a local environment using Docker\. This local environment emulates the cloud\-based execution environment of your Lambda function\.
+        ```
+          $ sam local start-api
+          Initializing the lambda functions containers.
+          Local image is up-to-date
+          Using local image: public.ecr.aws/lambda/python:3.9-rapid-x86_64.
+          
+          Mounting /Users/.../Demo/sam-tutorial1/sam-app/.aws-sam/build/HelloWorldFunction as /var/task:ro,delegated inside runtime container
+          Containers Initialization is done.
+          Mounting HelloWorldFunction at http://127.0.0.1:3000/hello [GET]
+          You can now browse to the above endpoints to invoke your functions. You do not need to restart/reload SAM CLI while working on your functions, changes will be reflected instantly/automatically. If you used sam build before running local commands, you will need to re-run sam build for the changes to be picked up. You only need to restart SAM CLI if you update your AWS SAM template
+          2023-03-15 14:25:21 WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+            * Running on http://127.0.0.1:3000
+          2023-03-15 14:25:21 Press CTRL+C to quit
+          ```
+    * hit local API endpoint
 
-You will do the following:
-
-1. Create a local environment for your Lambda function and invoke it\.
-
-1. Host your HTTP API endpoint locally and use it to invoke your Lambda function\.
-
-**To invoke your Lambda function locally**
-
-1. In your command line, from the `sam-app` project directory, run the following:
-
-   ```
-   $ sam local invoke
-   ```
-
-1. The AWS SAM CLI creates a local Docker container and invokes your function\. The following is an example output:
-
-   ```
-   $ sam local invoke
-   Invoking app.lambda_handler (python3.9)
-   Local image was not found.
-   Removing rapid images for repo public.ecr.aws/sam/emulation-python3.9
-   Building image.....................
-   Using local image: public.ecr.aws/lambda/python:3.9-rapid-x86_64.
-   
-   Mounting /Users/.../Demo/sam-tutorial1/sam-app/.aws-sam/build/HelloWorldFunction as /var/task:ro,delegated inside runtime container
-   START RequestId: b046db01-2a00-415d-af97-35f3a02e9eb6 Version: $LATEST
-   END RequestId: b046db01-2a00-415d-af97-35f3a02e9eb6
-   REPORT RequestId: b046db01-2a00-415d-af97-35f3a02e9eb6    Init Duration: 1.01 ms    Duration: 633.45 ms    Billed Duration: 634 ms    Memory Size: 128 MB    Max Memory Used: 128 MB
-   {"statusCode": 200, "body": "{\"message\": \"hello world\"}"}
-   ```
-
-**To host your API locally**
-
-1. In your command line, from the `sam-app` project directory, run the following:
-
-   ```
-   $ sam local start-api
-   ```
-
-1. The AWS SAM CLI creates a local Docker container for your Lambda function and creates a local HTTP server to simulate your API endpoint\. The following is an example output:
-
-   ```
-   $ sam local start-api
-   Initializing the lambda functions containers.
-   Local image is up-to-date
-   Using local image: public.ecr.aws/lambda/python:3.9-rapid-x86_64.
-   
-   Mounting /Users/.../Demo/sam-tutorial1/sam-app/.aws-sam/build/HelloWorldFunction as /var/task:ro,delegated inside runtime container
-   Containers Initialization is done.
-   Mounting HelloWorldFunction at http://127.0.0.1:3000/hello [GET]
-   You can now browse to the above endpoints to invoke your functions. You do not need to restart/reload SAM CLI while working on your functions, changes will be reflected instantly/automatically. If you used sam build before running local commands, you will need to re-run sam build for the changes to be picked up. You only need to restart SAM CLI if you update your AWS SAM template
-   2023-03-15 14:25:21 WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
-    * Running on http://127.0.0.1:3000
-   2023-03-15 14:25:21 Press CTRL+C to quit
-   ```
-
-1. Using your browser or the command line, send a GET request to your local API endpoint\. The following is an example using the curl command:
-
-   ```
-   $ curl http://127.0.0.1:3000/hello
-   {"message": "hello world"}
-   ```
+      ```
+      $ curl http://127.0.0.1:3000/hello
+      {"message": "hello world"}
+      ```
 
 ## Step 7: Delete your application from the AWS Cloud<a name="serverless-getting-started-hello-world-delete"></a>
 
+* TODO:
 In this step, you use the AWS SAM CLI sam delete command to delete your application from the AWS Cloud\.
 
 **To delete your application from the AWS Cloud**
