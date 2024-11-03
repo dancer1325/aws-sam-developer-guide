@@ -414,20 +414,13 @@ Next, you will modify your Lambda function code\. The AWS SAM CLI will automatic
       {"message": "hello world"}
       ```
 
-## Step 7: Delete your application from the AWS Cloud<a name="serverless-getting-started-hello-world-delete"></a>
+## Step 7: Delete your application | AWS Cloud<a name="serverless-getting-started-hello-world-delete"></a>
 
-* TODO:
-In this step, you use the AWS SAM CLI sam delete command to delete your application from the AWS Cloud\.
-
-**To delete your application from the AWS Cloud**
-
-1. In your command line, from the `sam-app` project directory, run the following:
-
-   ```
-   $ sam delete
-   ```
-
-1. The AWS SAM CLI will ask you to confirm\. Then, it will delete your application’s Amazon S3 bucket and AWS CloudFormation stack\. The following is an example output:
+* `sam delete` | `sam-app/`
+  * delete your application’s
+    * Amazon S3 bucket
+    * AWS CloudFormation stack
+  * example output
 
    ```
    $ sam delete
@@ -446,11 +439,10 @@ In this step, you use the AWS SAM CLI sam delete command to delete your applicat
 
 ## Troubleshooting<a name="serverless-getting-started-hello-world-troubleshoot"></a>
 
-To troubleshoot the AWS SAM CLI, see [AWS SAM CLI troubleshooting](sam-cli-troubleshooting.md)\.
+* see [AWS SAM CLI troubleshooting](sam-cli-troubleshooting.md)\.
 
 ## Learn more<a name="serverless-getting-started-hello-world-learn"></a>
 
-To continue learning about AWS SAM, see the following resources:
-+ **[The Complete AWS SAM Workshop](https://s12d.com/sam-ws-en-intro)** – A workshop designed to teach you many of the major features that AWS SAM provides\.
-+ **[ Sessions with SAM](https://www.youtube.com/playlist?list=PLJo-rJlep0ED198FJnTzhIB5Aut_1vDAd)** – Video series created by our AWS Serverless Developer Advocate team on using AWS SAM\.
-+ **[Serverless Land](https://serverlessland.com/)** – Site that brings together the latest information, blogs, videos, code, and learning resources for AWS serverless\.
++ **[The Complete AWS SAM Workshop](https://s12d.com/sam-ws-en-intro)**
++ **[ Sessions with SAM](https://www.youtube.com/playlist?list=PLJo-rJlep0ED198FJnTzhIB5Aut_1vDAd)**
++ **[Serverless Land](https://serverlessland.com/)**
