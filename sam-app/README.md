@@ -123,6 +123,12 @@
     ```
 * see [SAM CLI Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-logging.html).
 
+## Run your application
+
+* `sam list endpoints`
+  * get HTTP endpoint value
+* `curl https://valuePreviouslyGot/Prod/hello/`
+
 ## Tests
 
 ```bash
