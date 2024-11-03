@@ -1,17 +1,15 @@
 # Installing Docker to use with the AWS SAM CLI<a name="install-docker"></a>
 
-Docker is an application that runs containers on your machine\. With Docker, AWS SAM can provide a local environment similar to AWS Lambda as a container to build, test, and debug your serverless applications\.
-
-**Note**  
-Docker is required only for testing your applications locally and for building deployment packages using the `--use-container` option\.
+* Docker + AWS SAM
+  * allows
+    * local environment / 👀AWS Lambda == container to build, test, and debug your serverless applications 👀
+      * enabled via `... --use-container`
 
 **Topics**
 + [Installing Docker](#install-docker-instructions)
 + [Next steps](#install-docker-next-steps)
 
 ## Installing Docker<a name="install-docker-instructions"></a>
-
-Follow these instructions to install Docker on your operating system\.
 
 ### Linux<a name="install-docker-instructions-linux"></a>
 
@@ -64,22 +62,21 @@ If you run into issues installing Docker, see [Installation errors](sam-cli-trou
 
 ### macOS<a name="install-docker-instructions-macos"></a>
 
-**Note**  
-Docker Desktop is officially supported, but starting with AWS SAM CLI version 1\.47\.0, you can use alternatives as long as they use the Docker runtime\.
-
-1. Install Docker
-
-   The AWS SAM CLI supports Docker running on macOS Sierra 10\.12 or later\. For how to install Docker, see [Install Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/) on the Docker Docs website\.
-
-1. Configure your shared drives
-
-   The AWS SAM CLI requires that the project directory, or any parent directory, is listed in a shared drive\. This may require file sharing\. For more information, see the [ Volume mounting requires file sharing](https://docs.docker.com/desktop/troubleshoot/topics/#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-home) troubleshooting topic at *Docker docs*\.
-
-1. Verify the installation
-
-   After Docker is installed, verify that it's working\. Also confirm that you can run Docker commands from the command line \(for example, `docker ps`\)\. You don't need to install, fetch, or pull any containers—the AWS SAM CLI does this automatically as required\.
-
-If you run into issues installing Docker, for more troubleshooting tips, see the [Troubleshoot and diagnose](https://docs.docker.com/docker-for-mac/troubleshoot/) section of the Docker Docs website\.
+* requirements
+  * Docker runtime
+* Docker Desktop
+  * supported / AWS SAM CLI v1.47.0+
+* steps
+  1. Install Docker | macOS Sierra v10.12+
+     1. see
+        1. [Install Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/)
+        2. [Troubleshoot and diagnose](https://docs.docker.com/docker-for-mac/troubleshoot/)
+  2. Configure your shared drives
+     1. project directory or ANY parent directory -- MUST be -- listed | shared drive
+     2. see the [ Volume mounting requires file sharing](https://docs.docker.com/desktop/troubleshoot/topics/#volume-mounting-requires-file-sharing-for-any-project-directories-outside-of-home)
+  3. Verify the installation
+     1. run Docker commands
+        1. _Example:_ `docker ps`
 
 ### Windows<a name="install-docker-instructions-windows"></a>
 
@@ -104,4 +101,4 @@ If you run into issues installing Docker, for more troubleshooting tips, see the
 
 ## Next steps<a name="install-docker-next-steps"></a>
 
-For how to install the AWS SAM CLI, see [Installing the AWS SAM CLI](install-sam-cli.md)\.
+* see [Installing the AWS SAM CLI](install-sam-cli.md)\.
