@@ -1,20 +1,22 @@
 # Tutorial: Deploying a Hello World application<a name="serverless-getting-started-hello-world"></a>
 
-In this tutorial, you use the AWS Serverless Application Model Command Line Interface \(AWS SAM CLI\) to complete the following:
-+ Initialize, build, and deploy a sample **Hello World** application\.
-+ Make local changes and sync to AWS CloudFormation\.
-+ Test your application in the AWS Cloud\.
-+ Optionally, perform local testing on your development host\.
-+ Delete the sample application from the AWS Cloud\.
+* goal
+  * via AWS SAM CLI, to
+    + Initialize, build, and deploy a sample **Hello World** application\.
+    + Make local changes and sync -- to -- AWS CloudFormation\.
+    + Test your application | AWS Cloud\.
+    + Optionally, perform local testing | your development host\.
+    + Delete the sample application from the AWS Cloud\.
 
-The sample **Hello World** application implements a basic API backend\. It consists of the following resources:
-+ **Amazon API Gateway** – API endpoint that you will use to invoke your function\.
-+ **AWS Lambda** – Function that processes the HTTP API GET request and returns a `hello world` message\.
-+ **AWS Identity and Access Management \(IAM\) role** – Provisions permissions for the services to securely interact\.
+* **Hello World** application
+  * == **Amazon API Gateway** + **AWS Lambda** + **AWS IAM role**  
+    * API endpoint / -- used to invoke -- your function\.
+    + Function / 
+      + processes the HTTP API GET request
+      + returns a `hello world` message\.
+    + permissions for the services -- to securely -- interact\.
 
-The following diagram shows the components of this application:
-
-![\[A diagram of a Lambda function that's invoked when you send a GET request to the API Gateway endpoint.\]](http://docs.aws.amazon.com/serverless-application-model/latest/developerguide/images/gs-01.png)
+    ![\[A diagram of a Lambda function that's invoked when you send a GET request to the API Gateway endpoint.\]](http://docs.aws.amazon.com/serverless-application-model/latest/developerguide/images/gs-01.png)
 
 **Topics**
 + [Prerequisites](#serverless-getting-started-hello-world-prerequisites)
@@ -30,142 +32,94 @@ The following diagram shows the components of this application:
 
 ## Prerequisites<a name="serverless-getting-started-hello-world-prerequisites"></a>
 
-Verify that you have completed the following:
 + [AWS SAM prerequisites](prerequisites.md)
 + [Installing the AWS SAM CLI](install-sam-cli.md)
 
 ## Step 1: Initialize the sample Hello World application<a name="serverless-getting-started-hello-world-init"></a>
 
-In this step, you will use the AWS SAM CLI to create a sample **Hello World** application project on your local machine\.
+1. `sam init`
+2. AWS SAM CLI -- will guide you through -- initializing a new application
+   1. Select **AWS Quick Start Templates**
+   2. Choose the **Hello World Example** template and download it\.
+   3. Use the Python runtime and `zip` package type\.
+   4. opt OUT of [AWS X-Ray tracing](https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html)
+   5. opt OUT of monitoring -- via -- [Amazon CloudWatch Application Insights](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch-application-insights.html)
+   6. opt IN [structured logging](https://docs.aws.amazon.com/lambda/latest/operatorguide/parse-logs.html)
+   7. Name your application as **sam\-app**\.
 
-**To initialize the sample Hello World application**
+3. AWS SAM CLI 
+   1. downloads your starting template
+   2. creates the application project directory structure | your local machine
+      * example of the AWS SAM CLI output:
 
-1. In your command line, run the following from a starting directory of your choice:
-
-   ```
-   $ sam init
-   ```
-
-1. The AWS SAM CLI will guide you through initializing a new application\. Configure the following:
-
-   1. Select **AWS Quick Start Templates** to choose a starting template\.
-
-   1. Choose the **Hello World Example** template and download it\.
-
-   1. Use the Python runtime and `zip` package type\.
-
-   1. For this tutorial, opt out of AWS X\-Ray tracing\. To learn more, see [What is AWS X\-Ray?](https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html) in the *AWS X\-Ray Developer Guide*\.
-
-   1. For this tutorial, opt out of monitoring with Amazon CloudWatch Application Insights\. To learn more, see [ Amazon CloudWatch Application Insights](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch-application-insights.html) in the *Amazon CloudWatch User Guide*\.
-
-   1. Name your application as **sam\-app**\.
-
-   To use the AWS SAM CLI interactive flow:
-   + Brackets \(`[ ]`\) indicate default values\. Leave your answer blank to select the default value\.
-   + Enter **`y`** for **yes**, and **`n`** for **no**\.
-
-   The following is an example of the `sam init` interactive flow:
-
-   ```
-   $ sam init
-   ...
-   Which template source would you like to use?
-       1 - AWS Quick Start Templates
-       2 - Custom Template Location
-   Choice: 1
+         ```
+         Cloning from https://github.com/aws/aws-sam-cli-app-templates (process may take a moment)
    
-   Choose an AWS Quick Start application template
-       1 - Hello World Example
-       2 - Multi-step workflow
-       3 - Serverless API
-       4 - Scheduled task
-       5 - Standalone function
-       6 - Data processing
-       7 - Hello World Example With Powertools
-       8 - Infrastructure event management
-       9 - Serverless Connector Hello World Example
-       10 - Multi-step workflow with Connectors
-       11 - Lambda EFS example
-       12 - DynamoDB Example
-       13 - Machine Learning
-   Template: 1
+             -----------------------
+             Generating application:
+             -----------------------
+             Name: sam-app
+             Runtime: python3.9
+             Architectures: x86_64
+             Dependency Manager: pip
+             Application Template: hello-world
+             Output Directory: .
+             Configuration file: sam-app/samconfig.toml
    
-   Use the most popular runtime and package type? (Python and zip) [y/N]: y
-   
-   Would you like to enable X-Ray tracing on the function(s) in your application?  [y/N]: 
-   
-   Would you like to enable monitoring using CloudWatch Application Insights?
-   For more info, please view https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch-application-insights.html [y/N]: 
-   
-   Project name [sam-app]:
-   ```
-
-1. The AWS SAM CLI downloads your starting template and creates the application project directory structure on your local machine\. The following is an example of the AWS SAM CLI output:
-
-   ```
-   Cloning from https://github.com/aws/aws-sam-cli-app-templates (process may take a moment)
-   
-       -----------------------
-       Generating application:
-       -----------------------
-       Name: sam-app
-       Runtime: python3.9
-       Architectures: x86_64
-       Dependency Manager: pip
-       Application Template: hello-world
-       Output Directory: .
-       Configuration file: sam-app/samconfig.toml
-   
-       Next steps can be found in the README file at sam-app/README.md
+             Next steps can be found in the README file at sam-app/README.md
    
    
-   Commands you can use next
-   =========================
-   [*] Create pipeline: cd sam-app && sam pipeline init --bootstrap
-   [*] Validate SAM template: cd sam-app && sam validate
-   [*] Test Function in the Cloud: cd sam-app && sam sync --stack-name {stack-name} --watch
-   ```
+         Commands you can use next
+         =========================
+         [*] Create pipeline: cd sam-app && sam pipeline init --bootstrap
+         [*] Validate SAM template: cd sam-app && sam validate
+         [*] Test Function in the Cloud: cd sam-app && sam sync --stack-name {stack-name} --watch
+         ```
 
-1. From your command line, move to the newly created `sam-app` directory\. The following is an example of what the AWS SAM CLI has created:
+4. Check the structure of the project created 
 
-   ```
-   $ cd sam-app
+      ```
+      $ cd sam-app
    
-   $ tree
+      $ tree
    
-   ├── README.md
-   ├── __init__.py
-   ├── events
-   │   └── event.json
-   ├── hello_world
-   │   ├── __init__.py
-   │   ├── app.py
-   │   └── requirements.txt
-   ├── samconfig.toml
-   ├── template.yaml
-   └── tests
-       ├── __init__.py
-       ├── integration
-       │   ├── __init__.py
-       │   └── test_api_gateway.py
-       ├── requirements.txt
-       └── unit
-           ├── __init__.py
-           └── test_handler.py
+      ├── README.md
+      ├── __init__.py
+      ├── events
+      │   └── event.json
+      ├── hello_world
+      │   ├── __init__.py
+      │   ├── app.py
+      │   └── requirements.txt
+      ├── samconfig.toml
+      ├── template.yaml
+      └── tests
+          ├── __init__.py
+          ├── integration
+          │   ├── __init__.py
+          │   └── test_api_gateway.py
+          ├── requirements.txt
+          └── unit
+              ├── __init__.py
+              └── test_handler.py
            
-   6 directories, 14 files
-   ```
+      6 directories, 14 files
+      ```
 
-   Some important files to highlight:
-   + `hello_world/app.py` – Contains your Lambda function code\.
-   + `hello_world/requirements.txt` – Contains any Python dependencies that your Lambda function requires\.
-   + `samconfig.toml` – Configuration file for your application that stores default parameters used by the AWS SAM CLI\.
-   + `template.yaml` – The AWS SAM template that contains your application infrastructure code\.
-
-You now have a completely authored serverless application on your local machine\!
+  * important files
+    * `hello_world/app.py`
+      * == your Lambda function code
+    * `hello_world/requirements.txt`
+      * == Python dependencies / required by your Lambda function
+    * `samconfig.toml`
+      * == Configuration file -- for your -- application /
+        * stores default parameters -- used by the -- AWS SAM CLI
+    * `template.yaml`
+      * == AWS SAM template / contains your application infrastructure code\.
 
 ## Step 2: Build your application<a name="serverless-getting-started-hello-world-build"></a>
 
+* TODO:
 In this step, you use the AWS SAM CLI to build your application and prepare for deployment\. When you build, the AWS SAM CLI creates a `.aws-sam` directory and organizes your function dependencies, project code, and project files there\.
 
 **To build your application**
