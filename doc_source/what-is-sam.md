@@ -396,11 +396,18 @@
 
 **Manage your Terraform serverless applications**  
 * AWS SAM CLI
+  * 👀== extension of the AWS CLI 👀
   * allows
     * perform local debugging
     * testing your Lambda
       * functions
-      * layers 
+      * layers
+    * emulating your 
+      * application's build environment
+      * API 
+  * how does it work?
+    * run your functions | Amazon Linux environment / matches Lambda
+      * -- via -- Docker  
 * see [AWS SAM CLI Terraform support](terraform-support.md)\.
 
 ## Learn more<a name="what-is-sam-learn"></a>
