@@ -64,8 +64,10 @@ If you run into issues installing Docker, see [Installation errors](sam-cli-trou
 
 * requirements
   * Docker runtime
-* Docker Desktop
-  * supported / AWS SAM CLI v1.47.0+
+* supported
+  * Docker Desktop & AWS SAM CLI v1.47.0+
+  * others
+    * see [this issue](https://github.com/aws/aws-sam-cli/issues/3595)
 * steps
   1. Install Docker | macOS Sierra v10.12+
      1. see
