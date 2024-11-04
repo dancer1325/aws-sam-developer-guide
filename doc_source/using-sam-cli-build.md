@@ -1,12 +1,12 @@
 # Using sam build<a name="using-sam-cli-build"></a>
 
-Use the AWS Serverless Application Model Command Line Interface \(AWS SAM CLI\) `sam build` command to prepare your serverless application for subsequent steps in your development workflow, such as local testing or deploying to the AWS Cloud\. This command creates a `.aws-sam` directory that structures your application in a format and location that `sam local` and `sam deploy` require\.
-+ For an introduction to the AWS SAM CLI, see [What is the AWS SAM CLI?](what-is-sam.md#what-is-sam-cli)\.
-+ For a list of `sam build` command options, see [sam build](sam-cli-command-reference-sam-build.md)\.
-+ For an example of using `sam build` during a typical development workflow, see [Step 2: Build your application](serverless-getting-started-hello-world.md#serverless-getting-started-hello-world-build)\.
-
-**Note**  
-Using `sam build` requires that you start with the basic components of a serverless application on your development machine\. This includes an AWS SAM template, AWS Lambda function code, and any language\-specific files and dependencies\. To learn more, see [Using sam init](using-sam-cli-init.md)\.
+* goal
+  * use `sam build` command 
+    * to prepare your serverless application for subsequent steps | your development workflow (_Example:_ local testing or deploying to the AWS Cloud) 
+    * creates a `.aws-sam/` / 
+      * structures your application, required by `sam local` & `sam deploy` 
+* requirements
+  * [`sam init`](using-sam-cli-init.md)
 
 **Topics**
 + [Building applications with sam build](#using-sam-cli-build-apps)
@@ -19,6 +19,7 @@ Using `sam build` requires that you start with the basic components of a serverl
 
 ## Building applications with sam build<a name="using-sam-cli-build-apps"></a>
 
+* TODO:
 Before using `sam build`, consider and configure the following:
 
 1. **Lambda functions and layers** – The `sam build` command can build Lambda functions and layers\. To learn more about Lambda layers, see [Building layers](building-layers.md)\.
